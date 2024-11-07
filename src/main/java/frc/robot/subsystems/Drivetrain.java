@@ -12,9 +12,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.TimedRobot;
 import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.math.util.Units;
@@ -22,15 +20,15 @@ import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 
 
-public class Drivetrain extends SubsystemBase {
+public class Drivetrain {
         /*
          * Define and initialize the left and right motor controllers with the names `leftMotor` and
          * `rightMotor` respectively
          */
-        @Log(name = "Drive Left Motor")
+
         private CANSparkMax leftMotor = new CANSparkMax(
                         Constants.Drivetrain.Motor.CAN_IDs.LEFT_MOTOR, MotorType.kBrushless);
-        @Log(name = "Drive Right Motor")
+
         private CANSparkMax rightMotor = new CANSparkMax(
                         Constants.Drivetrain.Motor.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
 
