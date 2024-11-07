@@ -67,5 +67,13 @@ public class Drivetrain {
 
         }   
 
+        public tankDrive(double left, double right){
+            drive.tankDrive(left, right);   
+        }
+
+        public arcadeDrive(double fwd, double rot){
+            drive.arcadeDrive(fwd, rot);
+        }
+
 
 }
