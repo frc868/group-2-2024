@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package main.java.frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,21 +19,33 @@ import edu.wpi.first.wpilibj2.TimedRobot;
 import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.math.MathUtil;
+
 
 import frc.robot.Constants;
+import frc.robot.Constants.Drivetrain;
+import frc.robot.Constants.Drivetrain.Motors;
+import frc.robot.Constants.Drivetrain.Turn_Controller;
+import frc.robot.Constants.Drivetrain.Encoders;
 
 
 public class Drivetrain {
+        private AHRS ahrs;
+        private ProfiledPIDController turnController;
+
+        private double targetAngle;
+        private double rotateToAngleRate;
+
         /*
          * Define and initialize the left and right motor controllers with the names `leftMotor` and
          * `rightMotor` respectively
          */
 
         private CANSparkMax leftMotor = new CANSparkMax(
-                        Constants.Drivetrain.Motor.CAN_IDs.LEFT_MOTOR, MotorType.kBrushless);
+                        Motors.CAN_IDs.LEFT_MOTOR, MotorType.kBrushless);
 
         private CANSparkMax rightMotor = new CANSparkMax(
-                        Constants.Drivetrain.Motor.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
+                        Motors.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
 
         private final SlewRateLimiter leftLimiter = new SlewRateLimiter(2);
         private final SlewRateLimiter rightLimiter = new SlewRateLimiter(2);
@@ -53,26 +65,66 @@ public class Drivetrain {
         /* Initialize the drivetrain */
         public Drivetrain() {
                 /* Set the motors to be inverted correctly */
-                leftMotor.setInverted(Constants.Drivetrain.Motor.Direction.LEFT_INVERTED);
-                rightMotor.setInverted(Constants.Drivetrain.Motor.Direction.RIGHT_INVERTED);
+                leftMotor.setInverted(Motors.Direction.LEFT_INVERTED);
+                rightMotor.setInverted(Motors.Direction.RIGHT_INVERTED);
 
                 /*
                  * Set the position reading reported by encoders to be in inches instead of encoder
                  * units
                  */
                 leftEncoder.setPositionConversionFactor(
-                                Constants.Drivetrain.Encoders.ENCODER_TO_INCHES);
+                               Motors.Encoders.ENCODER_TO_INCHES);
                 rightEncoder.setPositionConversionFactor(
-                                Constants.Drivetrain.Encoders.ENCODER_TO_INCHES);
+                                Motors.Encoders.ENCODER_TO_INCHES);
 
         }   
 
-        public tankDrive(double left, double right){
+        /* Unassisted tankdrive */
+        public void tankDrive(double left, double right){
             drive.tankDrive(left, right);   
         }
 
-        public arcadeDrive(double fwd, double rot){
+        /* Unassisted arcade drive */
+        public void arcadeDrive(double fwd, double rot){
             drive.arcadeDrive(fwd, rot);
+        }
+
+        /* Initializes NavX2, call at robotInit */
+        public void ahrsInit(){
+            try{
+                ahrs = new AHRS(SPI.Port.kMXP);
+            } catch (RuntimeException ex){
+                DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
+            }
+            turnController = new ProfiledPIDController(Turn_Controller.kP, Turn_Controller.kI, Turn_Controller.kD, new TrapezoidProfile.Constraints(Turn_Controller.velocityConstraint, Turn_Controller.accelerationConstraint));
+            turnController.enableContinuousInput(-180.0f, 180.0f);
+        }
+
+        /* Resets the NavX2 yaw */
+        public void yawTare(){
+            ahrs.zeroYaw();
+        }
+
+        /* Sets turning target angle */
+        public void setTargetAngle(double angle){
+            targetAngle = angle;
+        }
+
+        /* Rotates to target angle with zero forward movement*/
+        public void rotateToAngle(){
+            rotateToAngle(0.0);
+        }
+
+        /* Rotates to target angle with forward movement */
+        public void rotateToAngle(double fwd){
+            rotateToAngleRate = 0.0f;
+            rotateToAngleRate = MathUtil.clamp(turnController.calculate(ahrs.getAngle(), targetAngle), -0.0, 1.0);
+            drive.arcadeDrive(fwd, rotateToAngleRate);
+        }
+
+        /* Returns true if the robot is at the target angle */
+        public boolean atTarget(){
+            return turnController.atGoal();
         }
 
 

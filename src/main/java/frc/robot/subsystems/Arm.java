@@ -1,4 +1,5 @@
 package main.java.frc.robot.subsystems;
+import frc.robot.Constants;
 
 public class Arm {
         private CANSparkMax armMotor = new CANSparkMax(
