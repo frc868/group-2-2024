@@ -22,14 +22,14 @@ public class constants {
         }
 
 
-        public static final class Turn_Controller{
+        public static final class TurnController{
             public static final double kP = 0.0;
             public static final double kI = 0.0;
             public static final double kD = 0.0;
             public static final double kF = 0.0;
             public static final double kToleranceDegrees = 2.0f;
-            public static final double velocityConstraint = 5.0;
-            public static final double accelerationConstraint = 10.0;
+            public static final double MAX_VELOCITY = 5.0;
+            public static final double MAX_ACCELERATION = 10.0;
         }
     }
     

@@ -89,6 +89,16 @@ public class Drivetrain {
             drive.arcadeDrive(fwd, rot);
         }
 
+        /* resets motor encoders */
+        public void resetEncoders(){
+            leftEncoder.setPosition(0);
+            rightEncoder.setPosition(0);
+        }
+
+        public double getAveragePosition() {
+            return (leftEncoder.getPosition() + rightEncoder.getPosition()) / 2;
+        }
+
         /* Initializes NavX2, call at robotInit */
         public void ahrsInit(){
             try{
@@ -96,7 +106,7 @@ public class Drivetrain {
             } catch (RuntimeException ex){
                 DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
             }
-            turnController = new ProfiledPIDController(Turn_Controller.kP, Turn_Controller.kI, Turn_Controller.kD, new TrapezoidProfile.Constraints(Turn_Controller.velocityConstraint, Turn_Controller.accelerationConstraint));
+            turnController = new ProfiledPIDController(TurnController.kP, TurnController.kI, TurnController.kD, new TrapezoidProfile.Constraints(TurnController.MAX_VELOCITY, TurnController.MAX_ACCELERATION));
             turnController.enableContinuousInput(-180.0f, 180.0f);
         }
 
