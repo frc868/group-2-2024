@@ -1,4 +1,4 @@
-package main.java.frc.robot.subsystems;
+package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -15,7 +15,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.TimedRobot;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.math.util.Units;
@@ -23,10 +23,9 @@ import edu.wpi.first.math.MathUtil;
 
 
 import frc.robot.Constants;
-import frc.robot.Constants.Drivetrain;
 import frc.robot.Constants.Drivetrain.Motors;
 import frc.robot.Constants.Drivetrain.Turn_Controller;
-import frc.robot.Constants.Drivetrain.Encoders;
+import frc.robot.Constants.Drivetrain.Motors.Encoders;
 
 
 public class Drivetrain {
@@ -41,9 +40,11 @@ public class Drivetrain {
          * `rightMotor` respectively
          */
 
+        @SuppressWarnings("removal")
         private CANSparkMax leftMotor = new CANSparkMax(
                         Motors.CAN_IDs.LEFT_MOTOR, MotorType.kBrushless);
 
+        @SuppressWarnings("removal")
         private CANSparkMax rightMotor = new CANSparkMax(
                         Motors.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
 
@@ -65,8 +66,8 @@ public class Drivetrain {
         /* Initialize the drivetrain */
         public Drivetrain() {
                 /* Set the motors to be inverted correctly */
-                leftMotor.setInverted(Motors.Direction.LEFT_INVERTED);
-                rightMotor.setInverted(Motors.Direction.RIGHT_INVERTED);
+                leftMotor.setInverted(Motors.Direction.LEFT_REVERSED);
+                rightMotor.setInverted(Motors.Direction.RIGHT_REVERSED);
 
                 /*
                  * Set the position reading reported by encoders to be in inches instead of encoder
@@ -106,8 +107,9 @@ public class Drivetrain {
             } catch (RuntimeException ex){
                 DriverStation.reportError("Error instantiating navX MXP: " + ex.getMessage(), true);
             }
-            turnController = new ProfiledPIDController(TurnController.kP, TurnController.kI, TurnController.kD, new TrapezoidProfile.Constraints(TurnController.MAX_VELOCITY, TurnController.MAX_ACCELERATION));
-            turnController.enableContinuousInput(-180.0f, 180.0f);
+            turnController = new ProfiledPIDController(Turn_Controller.kP, Turn_Controller.kI, Turn_Controller.kD, new TrapezoidProfile.Constraints(Turn_Controller.MAX_VELOCITY, Turn_Controller.MAX_ACCELERATION));
+            turnController.enableContinuousInput(-180.0, 180.0);
+            turnController.setTolerance(Turn_Controller.kToleranceDegrees);
         }
 
         /* Resets the NavX2 yaw */
@@ -127,7 +129,7 @@ public class Drivetrain {
 
         /* Rotates to target angle with forward movement */
         public void rotateToAngle(double fwd){
-            rotateToAngleRate = 0.0f;
+            rotateToAngleRate = 0.0;
             rotateToAngleRate = MathUtil.clamp(turnController.calculate(ahrs.getAngle(), targetAngle), -0.0, 1.0);
             drive.arcadeDrive(fwd, rotateToAngleRate);
         }

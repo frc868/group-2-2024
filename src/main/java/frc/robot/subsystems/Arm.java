@@ -1,13 +1,22 @@
-package main.java.frc.robot.subsystems;
+package frc.robot.subsystems;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+
 import frc.robot.Constants;
+import frc.robot.Constants.Arm.Motors;
+
 
 public class Arm {
+        @SuppressWarnings("removal")
         private CANSparkMax armMotor = new CANSparkMax(
-                        Constants.Drivetrain.Motor.CAN_IDs.LEFT_MOTOR, MotorType.kBrushless);
+                        Motors.CAN_IDs.ARM_MOTOR, MotorType.kBrushless);
+        @SuppressWarnings("removal")
         private CANSparkMax intakeMotor = new CANSparkMax(
-                        Constants.Drivetrain.Motor.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
+                        Motors.CAN_IDs.INTAKE_MOTOR, MotorType.kBrushless);
+        @SuppressWarnings("removal")
         private CANSparkMax shooterMotor = new CANSparkMax(
-                        Constants.Drivetrain.Motor.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
+                        Motors.CAN_IDs.SHOOTER_MOTOR, MotorType.kBrushless);
 
         /*
          * Define and initialize arm, intake, and shooter encoders. 
@@ -15,5 +24,4 @@ public class Arm {
         private RelativeEncoder armEncoder = armMotor.getEncoder();
         private RelativeEncoder intakeEncoder = intakeMotor.getEncoder();
         private RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
-    
 }
