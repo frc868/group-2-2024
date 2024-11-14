@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 
 import java.util.function.DoubleSupplier;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -40,11 +40,9 @@ public class Drivetrain {
          * `rightMotor` respectively
          */
 
-        @SuppressWarnings("removal")
         private CANSparkMax leftMotor = new CANSparkMax(
                         Motors.CAN_IDs.LEFT_MOTOR, MotorType.kBrushless);
 
-        @SuppressWarnings("removal")
         private CANSparkMax rightMotor = new CANSparkMax(
                         Motors.CAN_IDs.RIGHT_MOTOR, MotorType.kBrushless);
 
