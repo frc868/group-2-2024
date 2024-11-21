@@ -83,9 +83,14 @@ public class Arm {
                 return armController.atGoal();
         }
 
+
         public void resetEncoders(){
                 armEncoder.setPosition(0);
                 intakeEncoder.setPosition(0);
                 shooterEncoder.setPosition(0);
+        }
+
+        public double getShooterPosition(){
+                return shooterEncoder.getPosition();
         }
 }

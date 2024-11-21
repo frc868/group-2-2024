@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
     autonNum = 0;
     drivetrain.yawTare();
     drivetrain.resetEncoders();
+    arm.resetEncoders();  
   }
 
   @Override
@@ -86,12 +87,29 @@ public class Robot extends TimedRobot {
         break;
         //drives forward until encoder pos reaches required dist
       case 6:
+        arm.setArmTarget(1);
+        autonNum++;
+        break;
         //set arm target
       case 7:
+        arm.rotateArm();
+        if (arm.atTarget()){
+          autonNum++;
+        }
+        break;
         //raise arm
       case 8:
+        arm.rotateArm();
+        arm.startShooter();
+        if (arm.getShooterPosition() >= 200){
+          autonNum++;
+          arm.stopShooter();
+        }
+        break;
         //shoot
       case 9:
+        arm.stopArm();
+        break; 
         //stop
     }
   }
