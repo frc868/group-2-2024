@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.Auton;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,10 +19,15 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+  Drivetrain drivetrain;
+  Arm arm;
+  int autonNum;
+
+
   @Override
   public void robotInit() {
-    Drivetrain drivetrain = new Drivetrain();
-    Arm arm = new Arm();
+    drivetrain = new Drivetrain();
+    arm = new Arm();
   }
 
 
@@ -30,10 +36,47 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    autonNum = 0;
+    drivetrain.yawTare();
+    drivetrain.resetEncoders();
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic(){ 
+    switch (autonNum){
+      case 0:
+        drivetrain.setTargetAngle(drivetrain.getAngle());
+        autonNum++;
+        //Ensures forward driving
+      case 1:
+        drivetrain.rotateToAngle(Auton.Drive_0.SPEED);
+        if (drivetrain.getAveragePosition() >= Auton.Drive_0.DISTANCE){
+          autonNum++;
+          drivetrain.stop();
+        }
+        //drives forward until encoder pos reaches required dist
+      case 2:
+        drivetrain.setTargetAngle(Auton.Turn_1.ANGLE);
+        autonNum++;
+      case 3:
+        drivetrain.rotateToAngle();
+        if(drivetrain.atTarget()){
+          autonNum++;
+          drivetrain.stop();
+        }
+      case 4:
+        drivetrain.setTargetAngle(drivetrain.getAngle());
+        autonNum++;
+        drivetrain.resetEncoders();
+      case 5:
+        drivetrain.rotateToAngle(Auton.Drive_2.SPEED);
+        if (drivetrain.getAveragePosition() >= Auton.Drive_2.DISTANCE){
+          autonNum++;
+          drivetrain.stop();
+          drivetrain.resetEncoders();
+        }
+    }
+  }
 
   @Override
   public void teleopInit() {}

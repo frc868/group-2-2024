@@ -31,16 +31,36 @@ public class Constants {
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;
         }
+
     }
 
     public static final class Arm{
-        
         public static final class Motors{
             public static final class CAN_IDs{
                 public static final int ARM_MOTOR = 3;
                 public static final int INTAKE_MOTOR = 4;
                 public static final int SHOOTER_MOTOR = 5;
             }
+        }
+    }
+    
+    public static final class Auton{
+        public static final class Drive_0{
+            public static final double DISTANCE = 10.0;
+            public static final double SPEED = 0.5;
+        }
+        public static final class Turn_1{
+            public static final double ANGLE = 45.0;
+        }
+        public static final class Drive_2{
+            public static final double DISTANCE = 5.0;
+            public static final double SPEED = 0.5;
+        }
+        public static final class RaiseArm_3{
+            public static final int SETTING = 1;
+        }
+        public static final class Shoot_4{
+            public static final int SETTING = 1;
         }
     }
     

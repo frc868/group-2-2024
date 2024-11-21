@@ -132,6 +132,14 @@ public class Drivetrain {
             drive.arcadeDrive(fwd, rotateToAngleRate);
         }
 
+        public void stop(){
+            drive.stopMotor();
+        }
+
+        public double getAngle(){
+            return ahrs.getAngle();
+        }
+
         /* Returns true if the robot is at the target angle */
         public boolean atTarget(){
             return turnController.atGoal();
