@@ -49,6 +49,7 @@ public class Constants {
             }
 
             public static final class Voltages{ //PRELIM HAVE NOT TESTED!
+                public static final double ARM_VOLTAGE = 6.0;
                 public static final double INTAKE_VOLTAGE = 6.0;
                 public static final double SHOOTER_VOLTAGE = 6.0;
             }

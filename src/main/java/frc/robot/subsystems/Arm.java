@@ -3,11 +3,13 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants.Arm.Arm_Controller;
+import frc.robot.Constants.Arm.Arm_Targets;
 import frc.robot.Constants.Arm.Motors;
-import frc.robot.Constants.Arm.Arm_Targets;;
+import frc.robot.Constants.Arm.Motors.Voltages;;
 
 
 public class Arm {
@@ -66,5 +68,24 @@ public class Arm {
                                 armController.setGoal(Arm_Targets.FLOOR_ARM);
                                 break;
                 }       
+        }
+
+        public void rotateArm(){
+                rotateArmRate = MathUtil.clamp(armController.calculate(armEncoder.getPosition()), -Voltages.ARM_VOLTAGE, Voltages.ARM_VOLTAGE);
+                armMotor.setVoltage(rotateArmRate);
+        }
+
+        public void stopArm(){
+                armMotor.stopMotor();
+        }
+
+        public boolean atTarget(){
+                return armController.atGoal();
+        }
+
+        public void resetEncoders(){
+                armEncoder.setPosition(0);
+                intakeEncoder.setPosition(0);
+                shooterEncoder.setPosition(0);
         }
 }
