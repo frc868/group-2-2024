@@ -41,6 +41,27 @@ public class Constants {
                 public static final int INTAKE_MOTOR = 4;
                 public static final int SHOOTER_MOTOR = 5;
             }
+
+            public static final class Direction{
+                public static final boolean ARM_REVERSED = false;
+                public static final boolean INTAKE_REVERSED = false;
+                public static final boolean SHOOTER_REVERSED = false;
+            }
+
+            public static final class Voltages{ //PRELIM HAVE NOT TESTED!
+                public static final double INTAKE_VOLTAGE = 6.0;
+                public static final double SHOOTER_VOLTAGE = 6.0;
+            }
+        }
+
+        public static final class Arm_Controller{
+            public static final double kP = 1.0;
+            public static final double kI = 0.1;
+            public static final double kD = 0.0;
+            public static final double kF = 0.0;
+            public static final double kToleranceDegrees = 2.0;
+            public static final double MAX_VELOCITY = 5.0;
+            public static final double MAX_ACCELERATION = 10.0;
         }
     }
     

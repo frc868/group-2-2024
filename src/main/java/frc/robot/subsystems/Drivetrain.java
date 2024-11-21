@@ -76,6 +76,8 @@ public class Drivetrain {
                 rightEncoder.setPositionConversionFactor(
                                 Motors.Encoders.ENCODER_TO_INCHES);
 
+                ahrsInit();
+
         }   
 
         /* Unassisted tankdrive */
