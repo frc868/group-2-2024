@@ -7,7 +7,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants.Arm.Arm_Controller;
 import frc.robot.Constants.Arm.Motors;
-import frc.robot.Constants.Drivetrain.Turn_Controller;
+import frc.robot.Constants.Arm.Arm_Targets;;
 
 
 public class Arm {
@@ -52,6 +52,19 @@ public class Arm {
         }
 
         public void setArmTarget(int target){
-                armController.setGoal(0);
+                switch (target){
+                        case 1:
+                                armController.setGoal(Arm_Targets.HIGH_ARM);
+                                break;
+                        case 2:
+                                armController.setGoal(Arm_Targets.MID_ARM);
+                                break;
+                        case 3:
+                                armController.setGoal(Arm_Targets.LOW_ARM);
+                                break;
+                        case 4:
+                                armController.setGoal(Arm_Targets.FLOOR_ARM);
+                                break;
+                }       
         }
 }

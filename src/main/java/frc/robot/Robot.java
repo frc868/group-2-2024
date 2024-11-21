@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
       case 0:
         drivetrain.setTargetAngle(drivetrain.getAngle());
         autonNum++;
+        break;
         //Ensures forward driving
       case 1:
         drivetrain.rotateToAngle(Auton.Drive_0.SPEED);
@@ -54,10 +55,12 @@ public class Robot extends TimedRobot {
           autonNum++;
           drivetrain.stop();
         }
+        break;
         //drives forward until encoder pos reaches required dist
       case 2:
         drivetrain.setTargetAngle(Auton.Turn_1.ANGLE);
         autonNum++;
+        break;
         //sets turn angle
       case 3:
         drivetrain.rotateToAngle();
@@ -65,11 +68,13 @@ public class Robot extends TimedRobot {
           autonNum++;
           drivetrain.stop();
         }
+        break;
         //turns on the spot
       case 4:
         drivetrain.setTargetAngle(drivetrain.getAngle());
         autonNum++;
         drivetrain.resetEncoders();
+        break;
         //ensures forward driving
       case 5:
         drivetrain.rotateToAngle(Auton.Drive_2.SPEED);
@@ -78,6 +83,7 @@ public class Robot extends TimedRobot {
           drivetrain.stop();
           drivetrain.resetEncoders();
         }
+        break;
         //drives forward until encoder pos reaches required dist
       case 6:
         //set arm target

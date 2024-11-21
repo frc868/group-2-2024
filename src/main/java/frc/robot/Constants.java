@@ -63,6 +63,13 @@ public class Constants {
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;
         }
+
+        public static final class Arm_Targets{
+            public static final double HIGH_ARM = 60.0;
+            public static final double MID_ARM = 40.0;
+            public static final double LOW_ARM = 20.0;
+            public static final double FLOOR_ARM = 0.0;
+        }
     }
     
     public static final class Auton{
