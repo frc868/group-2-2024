@@ -25,10 +25,9 @@ public class Constants {
 
 
         public static final class Turn_Controller{
-            public static final double kP = 1.0;
-            public static final double kI = 0.1;
-            public static final double kD = 0.0;
-            public static final double kF = 0.0;
+            public static final double kP = 2.0;
+            public static final double kI = 0.0;
+            public static final double kD = 0.2;
             public static final double kToleranceDegrees = 2.0;
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;
@@ -59,12 +58,14 @@ public class Constants {
 
         public static final class Arm_Controller{
             public static final double kP = 2.0;
-            public static final double kI = 0.1;
+            public static final double kI = 0.0;
             public static final double kD = 0.3;
+
             public static final double kG = 0.5;
             public static final double kS = 0.7;
             public static final double kV = 0.0;
             public static final double kA = 0.0;
+
             public static final double kTolerance = Units.degreesToRadians(2.0);
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;

@@ -40,7 +40,7 @@ public class Arm {
                 armEncoder.setPositionConversionFactor(Encoders.ENCODER_TO_RADIANS);
                 armEncoder.setPosition(0);
                 armController = new ProfiledPIDController(Arm_Controller.kP, Arm_Controller.kI, Arm_Controller.kD, new TrapezoidProfile.Constraints(Arm_Controller.MAX_VELOCITY, Arm_Controller.MAX_ACCELERATION));
-                armFeedforward = new ArmFeedforward(Arm_Controller.kG, Arm_Controller.kS, Arm_Controller.kV, Arm_Controller.kA);
+                armFeedforward = new ArmFeedforward(Arm_Controller.kS, Arm_Controller.kG, Arm_Controller.kV, Arm_Controller.kA);
         }
 
         public void startIntake(){
