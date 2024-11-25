@@ -5,8 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.Auton;
+import frc.robot.Constants.Controller;;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,6 +24,8 @@ public class Robot extends TimedRobot {
   Drivetrain drivetrain;
   Arm arm;
   int autonNum;
+  boolean driveMode = true; //true for arcade, false for tank
+  XboxController controller = new XboxController(0);
 
 
   @Override
@@ -119,7 +123,45 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if (controller.getStartButtonPressed()){
+      driveMode = true;
+    }
+    if (controller.getBackButtonPressed()){
+      driveMode = false;
+    }
+    if (controller.getAButtonPressed()){
+      arm.setArmTarget(4);
+    }else if (controller.getBButtonPressed()){
+      arm.setArmTarget(1);
+    }else if (controller.getXButtonPressed()){
+      arm.setArmTarget(2);
+    }else if (controller.getYButtonPressed()){
+      arm.setArmTarget(3);
+    }
+
+    if (driveMode){
+      drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
+    }else{  
+      drivetrain.tankDrive(controller.getLeftY(), controller.getRightY());
+    }
+
+    if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
+      arm.startIntake(controller.getLeftTriggerAxis());
+    }else{
+      arm.startIntake();
+    }
+
+    if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
+      arm.startShooter(controller.getRightTriggerAxis());
+    }else{
+      arm.stopShooter();
+    }
+    
+    arm.rotateArm();
+      
+    
+  }
 
   @Override
   public void disabledInit() {}

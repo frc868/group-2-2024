@@ -3,6 +3,12 @@ package frc.robot;
 import edu.wpi.first.math.util.Units;
 
 public class Constants {
+    public static final class Controller{
+        public static final class threshholds{
+            public static final double triggerDeadzone = 0.1;
+        }
+    }
+
     public static final class Drivetrain{
         
         public static class Limiter {

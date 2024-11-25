@@ -43,16 +43,24 @@ public class Arm {
                 armFeedforward = new ArmFeedforward(Arm_Controller.kS, Arm_Controller.kG, Arm_Controller.kV, Arm_Controller.kA);
         }
 
+        public void startIntake(double speed){
+                intakeMotor.setVoltage(Motors.Voltages.INTAKE_VOLTAGE * speed);
+        }
+
         public void startIntake(){
-                intakeMotor.setVoltage(Motors.Voltages.INTAKE_VOLTAGE);
+                startIntake(1.0);
         }
 
         public void stopIntake(){
                 intakeMotor.stopMotor();
         }
 
+        public void startShooter(double speed){
+                shooterMotor.setVoltage(Motors.Voltages.SHOOTER_VOLTAGE * speed);
+        }
+
         public void startShooter(){
-                shooterMotor.setVoltage(Motors.Voltages.SHOOTER_VOLTAGE);
+                startShooter(1.0);
         }
 
         public void stopShooter(){
