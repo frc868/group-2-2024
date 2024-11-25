@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.math.util.Units;
+
 public class Constants {
     public static final class Drivetrain{
 
@@ -56,20 +58,28 @@ public class Constants {
         }
 
         public static final class Arm_Controller{
-            public static final double kP = 1.0;
+            public static final double kP = 2.0;
             public static final double kI = 0.1;
-            public static final double kD = 0.0;
-            public static final double kF = 0.0;
-            public static final double kToleranceDegrees = 2.0;
+            public static final double kD = 0.3;
+            public static final double kG = 0.5;
+            public static final double kS = 0.7;
+            public static final double kV = 0.0;
+            public static final double kA = 0.0;
+            public static final double kTolerance = Units.degreesToRadians(2.0);
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;
         }
 
         public static final class Arm_Targets{
-            public static final double HIGH_ARM = 60.0;
-            public static final double MID_ARM = 40.0;
-            public static final double LOW_ARM = 20.0;
-            public static final double FLOOR_ARM = 0.0;
+            public static final double HIGH_ARM = Units.degreesToRadians(60.0);
+            public static final double MID_ARM = Units.degreesToRadians(40.0);
+            public static final double LOW_ARM = Units.degreesToRadians(20.0);
+            public static final double FLOOR_ARM = Units.degreesToRadians(0.0);
+        }
+
+        public static final class Encoders{
+            public static final double GEAR_RATIO = 1 / 15.0;
+            public static final double ENCODER_TO_RADIANS = GEAR_RATIO * Math.PI * 2;
         }
     }
     

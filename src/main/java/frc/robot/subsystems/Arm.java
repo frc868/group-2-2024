@@ -4,13 +4,15 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants.Arm.Arm_Controller;
 import frc.robot.Constants.Arm.Arm_Targets;
 import frc.robot.Constants.Arm.Motors;
-import frc.robot.Constants.Arm.Motors.Voltages;;
+import frc.robot.Constants.Arm.Motors.Voltages;
 
+import frc.robot.Constants.Arm.Encoders;
 
 public class Arm {
         private CANSparkMax armMotor = new CANSparkMax(
@@ -29,12 +31,16 @@ public class Arm {
         private double rotateArmRate;
 
         private ProfiledPIDController armController;
+        private ArmFeedforward armFeedforward;
 
         public Arm(){
                 armMotor.setInverted(Motors.Direction.ARM_REVERSED);
                 intakeMotor.setInverted(Motors.Direction.INTAKE_REVERSED);
                 shooterMotor.setInverted(Motors.Direction.SHOOTER_REVERSED);
+                armEncoder.setPositionConversionFactor(Encoders.ENCODER_TO_RADIANS);
+                armEncoder.setPosition(0);
                 armController = new ProfiledPIDController(Arm_Controller.kP, Arm_Controller.kI, Arm_Controller.kD, new TrapezoidProfile.Constraints(Arm_Controller.MAX_VELOCITY, Arm_Controller.MAX_ACCELERATION));
+                armFeedforward = new ArmFeedforward(Arm_Controller.kG, Arm_Controller.kS, Arm_Controller.kV, Arm_Controller.kA);
         }
 
         public void startIntake(){
@@ -54,6 +60,7 @@ public class Arm {
         }
 
         public void setArmTarget(int target){
+                armController.reset(armEncoder.getPosition());
                 switch (target){
                         case 1:
                                 armController.setGoal(Arm_Targets.HIGH_ARM);
@@ -71,8 +78,10 @@ public class Arm {
         }
 
         public void rotateArm(){
-                rotateArmRate = MathUtil.clamp(armController.calculate(armEncoder.getPosition()), -Voltages.ARM_VOLTAGE, Voltages.ARM_VOLTAGE);
-                armMotor.setVoltage(rotateArmRate);
+                armController.reset(armEncoder.getPosition());
+                double feedforward = armFeedforward.calculate(armController.getSetpoint().position, armController.getSetpoint().velocity);
+                double pid = armController.calculate(armEncoder.getPosition());
+                armMotor.setVoltage(feedforward + pid);
         }
 
         public void stopArm(){

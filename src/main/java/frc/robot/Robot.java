@@ -108,7 +108,8 @@ public class Robot extends TimedRobot {
         break;
         //shoot
       case 9:
-        arm.stopArm();
+        arm.setArmTarget(1);
+        arm.rotateArm();
         break; 
         //stop
     }
