@@ -4,8 +4,14 @@ import edu.wpi.first.math.util.Units;
 
 public class Constants {
     public static final class Drivetrain{
+        
+        public static class Limiter {
+            public static final double SPEED_MULTIPLIER = 0.7;
+            public static final double ROTATION_MULTIPLIER = 0.7;
+        }
 
         public static final class Motors{
+
             public static final class CAN_IDs{
                 public static final int LEFT_MOTOR = 1;
                 public static final int RIGHT_MOTOR = 2;

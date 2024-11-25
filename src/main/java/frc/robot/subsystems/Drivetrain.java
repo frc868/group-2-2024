@@ -1,10 +1,6 @@
 package frc.robot.subsystems;
 
 
-import edu.wpi.first.wpilibj.TimedRobot;
-
-import java.util.function.DoubleSupplier;
-
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -18,14 +14,12 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.math.MathUtil;
 
 
-import frc.robot.Constants;
 import frc.robot.Constants.Drivetrain.Motors;
+import frc.robot.Constants.Drivetrain.Limiter;
 import frc.robot.Constants.Drivetrain.Turn_Controller;
-import frc.robot.Constants.Drivetrain.Motors.Encoders;
 
 
 public class Drivetrain {
@@ -82,12 +76,13 @@ public class Drivetrain {
 
         /* Unassisted tankdrive */
         public void tankDrive(double left, double right){
-            drive.tankDrive(left, right);   
+            leftMotor.setVoltage(12.0 * leftLimiter.calculate(left) * Limiter.SPEED_MULTIPLIER);
+            rightMotor.setVoltage(12.0 * rightLimiter.calculate(right) * Limiter.SPEED_MULTIPLIER);
         }
 
         /* Unassisted arcade drive */
         public void arcadeDrive(double fwd, double rot){
-            drive.arcadeDrive(fwd, rot);
+            drive.arcadeDrive(leftLimiter.calculate(fwd * Limiter.SPEED_MULTIPLIER), rightLimiter.calculate(rot * Limiter.ROTATION_MULTIPLIER));
         }
 
         /* resets motor encoders */
