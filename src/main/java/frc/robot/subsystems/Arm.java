@@ -81,7 +81,8 @@ public class Arm {
                 armController.reset(armEncoder.getPosition());
                 double feedforward = armFeedforward.calculate(armController.getSetpoint().position, armController.getSetpoint().velocity);
                 double pid = armController.calculate(armEncoder.getPosition());
-                armMotor.setVoltage(feedforward + pid);
+                rotateArmRate = MathUtil.clamp(pid + feedforward, -Voltages.ARM_VOLTAGE, Voltages.ARM_VOLTAGE);
+                armMotor.setVoltage(rotateArmRate);
         }
 
         public void stopArm(){
