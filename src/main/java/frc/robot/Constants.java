@@ -19,8 +19,8 @@ public class Constants {
         public static final class Motors{
 
             public static final class CAN_IDs{
-                public static final int LEFT_MOTOR = 1;
-                public static final int RIGHT_MOTOR = 2;
+                public static final int LEFT_MOTOR = 6;
+                public static final int RIGHT_MOTOR = 7;
             }
 
             //TODO: UPDATE ENCODER CONVERSIONS AND DIRECTION INVERTS
@@ -50,9 +50,9 @@ public class Constants {
     public static final class Arm{
         public static final class Motors{
             public static final class CAN_IDs{
-                public static final int ARM_MOTOR = 3;
-                public static final int INTAKE_MOTOR = 4;
-                public static final int SHOOTER_MOTOR = 5;
+                public static final int ARM_MOTOR = 8;
+                public static final int INTAKE_MOTOR = 10;
+                public static final int SHOOTER_MOTOR = 9;
             }
 
             public static final class Direction{
