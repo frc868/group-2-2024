@@ -96,14 +96,14 @@ public class Robot extends TimedRobot {
         break;
         //set arm target
       case 7:
-        arm.rotateArm();
+        //arm.rotateArm();
         if (arm.atTarget()){
           autonNum++;
         }
         break;
         //raise arm
       case 8:
-        arm.rotateArm();
+        //arm.rotateArm();
         arm.startShooter();
         if (arm.getShooterPosition() >= 200){
           autonNum++;
@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
         //shoot
       case 9:
         arm.setArmTarget(1);
-        arm.rotateArm();
+        //arm.rotateArm();
         break; 
         //stop
     }
@@ -124,10 +124,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    if (controller.getXButtonPressed()){
-      drivetrain.tankDrive(0.3, 0);
-    }
-
 
     if (controller.getStartButtonPressed()){
       driveMode = true;
@@ -159,7 +155,7 @@ public class Robot extends TimedRobot {
       arm.stopShooter();
     }
     
-    arm.rotateArm();
+    //arm.rotateArm();
       
     
   }
