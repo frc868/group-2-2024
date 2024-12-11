@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
       arm.setArmTarget(2);
     }*/
 
-    if (controller.getAButtonPressed()){
+    /*if (controller.getAButtonPressed()){
       drivetrain.rotateToAngle();
     }
     
@@ -154,18 +154,20 @@ public class Robot extends TimedRobot {
     
     if (controller.getYButtonPressed()){
       drivetrain.setTargetAngle(90);
-    }
+    }*/
 
     
 
-    /*if (driveMode){
+    if (driveMode){
       drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
     }else{  
       drivetrain.tankDrive(controller.getLeftY(), controller.getRightY());
-    }*/
+    }
 
-    if (Math.abs(controller.getLeftY()) > Controller.threshholds.triggerDeadzone){
-      arm.startArm(controller.getLeftY());
+    if (controller.getRightBumper()){
+      arm.startArm(0.5);
+    }else if (controller.getLeftBumper()){
+      arm.startArm(-0.5);
     }else{
       arm.stopArm();
     }
@@ -182,8 +184,6 @@ public class Robot extends TimedRobot {
       arm.stopShooter();
     }
 
-    
-    
     //arm.rotateArm();
       
     
