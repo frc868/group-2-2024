@@ -5,7 +5,7 @@ import edu.wpi.first.math.util.Units;
 public class Constants {
     public static final class Controller{
         public static final class threshholds{
-            public static final double triggerDeadzone = 0.1;
+            public static final double triggerDeadzone = 0.3;
         }
     }
 
@@ -63,7 +63,7 @@ public class Constants {
 
             public static final class Voltages{ //PRELIM HAVE NOT TESTED!
                 public static final double ARM_VOLTAGE = 6.0;
-                public static final double INTAKE_VOLTAGE = 6.0;
+                public static final double INTAKE_VOLTAGE = 3.0;
                 public static final double SHOOTER_VOLTAGE = 6.0;
             }
         }
