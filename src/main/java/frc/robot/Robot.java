@@ -146,7 +146,7 @@ public class Robot extends TimedRobot {
       drivetrain.rotateToAngle();
     }
     
-    if (controller.getXButtonPressed()){
+    if (controller.getBButtonPressed()){
       drivetrain.yawTare();
       drivetrain.resetEncoders();
       drivetrain.setTargetAngle(drivetrain.getAngle());
@@ -165,23 +165,24 @@ public class Robot extends TimedRobot {
     // }
 
     if (controller.getRightBumper()){
-      arm.startShooter(1.0);
+      arm.startArm(0.5);
     }else if (controller.getLeftBumper()){
-      arm.startShooter(-1.0);
+      arm.startArm(-0.5);
     }else{
       arm.stopShooter();
     }
 
-    // if (controller.getXButton()){
-    //   arm.startIntake(-1.0);
-    // }else if (controller.getBButton()){
-    //   arm.startIntake(1.0);
-    // }else{
-    //   arm.stopIntake();
-    // }
 
-    if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
-      arm.startArm(controller.getLeftTriggerAxis());
+    if (controller.getXButton()){
+      arm.startIntake(-0.5);
+    }else if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
+      arm.startIntake(controller.getLeftTriggerAxis());
+    }else{
+      arm.stopIntake();
+    }
+
+    if (controller.getXButton()){
+      arm.startShooter(-0.5);
     }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
       arm.startArm(-controller.getRightTriggerAxis());
     }else{
