@@ -37,14 +37,14 @@ public class Constants {
 
 
         public static final class Turn_Controller{
-            public static final double kP = 2.0;
+            public static final double kP = 8.0;
             public static final double kI = 0.0;
             public static final double kD = 0.2;
             public static final double kToleranceDegrees = 2.0;
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;
-            public static final double MULTIPLIER = 0.5;
-            public static final double CLAMP = 0.5;
+            public static final double MULTIPLIER = 1.0;
+            public static final double CLAMP = 1.0;
         }
 
     }

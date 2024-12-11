@@ -54,75 +54,81 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic(){ 
     switch (autonNum){
-      case 0:
-        drivetrain.setTargetAngle(drivetrain.getAngle());
-        autonNum++;
-        break;
-        //Ensures forward driving
-      case 1:
-        drivetrain.rotateToAngle(Auton.Drive_0.SPEED);
+      case 0: 
+        drivetrain.tankDrive(0.8, 0.8);
         if (drivetrain.getAveragePosition() >= Auton.Drive_0.DISTANCE){
           autonNum++;
           drivetrain.stop();
         }
-        break;
-        //drives forward until encoder pos reaches required dist
-      case 2:
-        drivetrain.setTargetAngle(Auton.Turn_1.ANGLE);
-        autonNum++;
-        break;
-        //sets turn angle
-      case 3:
-        drivetrain.rotateToAngle();
-        if(drivetrain.atTarget()){
-          autonNum++;
-          drivetrain.stop();
-        }
-        break;
-        //turns on the spot
-      case 4:
-        drivetrain.setTargetAngle(drivetrain.getAngle());
-        autonNum++;
-        drivetrain.resetEncoders();
-        break;
-        //ensures forward driving
-      case 5:
-        drivetrain.rotateToAngle(Auton.Drive_2.SPEED);
-        if (drivetrain.getAveragePosition() >= Auton.Drive_2.DISTANCE){
-          autonNum++;
-          drivetrain.stop();
-          drivetrain.resetEncoders();
-        }
-        break;
-        //drives forward until encoder pos reaches required dist
-      case 6:
-        arm.setArmTarget(1);
-        autonNum++;
-        break;
-        //set arm target
-      case 7:
-        arm.rotateArm();
-        if (arm.atTarget()){
-          autonNum++;
-        }
-        break;
-        //raise arm
-      case 8:
-        arm.rotateArm();
-        arm.startShooter();
-        arm.startIntake();
-        if (arm.getShooterPosition() >= 200){
-          autonNum++;
-          arm.stopShooter();
-          arm.stopIntake();
-        }
-        break;
-        //shoot
-      case 9:
-        arm.setArmTarget(2);
-        arm.rotateArm();
-        break; 
-        //stop
+      // case 0:
+      //   drivetrain.setTargetAngle(drivetrain.getAngle());
+      //   autonNum++;
+      //   break;
+      //   //Ensures forward driving
+      // case 1:
+      //   drivetrain.rotateToAngle(Auton.Drive_0.SPEED);
+      //   if (drivetrain.getAveragePosition() >= Auton.Drive_0.DISTANCE){
+      //     autonNum++;
+      //     drivetrain.stop();
+      //   }
+      //   break;
+      //   //drives forward until encoder pos reaches required dist
+      // case 2:
+      //   drivetrain.setTargetAngle(Auton.Turn_1.ANGLE);
+      //   autonNum++;
+      //   break;
+      //   //sets turn angle
+      // case 3:
+      //   drivetrain.rotateToAngle();
+      //   if(drivetrain.atTarget()){
+      //     autonNum++;
+      //     drivetrain.stop();
+      //   }
+      //   break;
+      //   //turns on the spot
+      // case 4:
+      //   drivetrain.setTargetAngle(drivetrain.getAngle());
+      //   autonNum++;
+      //   drivetrain.resetEncoders();
+      //   break;
+      //   //ensures forward driving
+      // case 5:
+      //   drivetrain.rotateToAngle(Auton.Drive_2.SPEED);
+      //   if (drivetrain.getAveragePosition() >= Auton.Drive_2.DISTANCE){
+      //     autonNum++;
+      //     drivetrain.stop();
+      //     drivetrain.resetEncoders();
+      //   }
+      //   break;
+      //   //drives forward until encoder pos reaches required dist
+      // case 6:
+      //   arm.setArmTarget(1);
+      //   autonNum++;
+      //   break;
+      //   //set arm target
+      // case 7:
+      //   arm.rotateArm();
+      //   if (arm.atTarget()){
+      //     autonNum++;
+      //   }
+      //   break;
+      //   //raise arm
+      // case 8:
+      //   arm.rotateArm();
+      //   arm.startShooter();
+      //   arm.startIntake();
+      //   if (arm.getShooterPosition() >= 200){
+      //     autonNum++;
+      //     arm.stopShooter();
+      //     arm.stopIntake();
+      //   }
+      //   break;
+      //   //shoot
+      // case 9:
+      //   arm.setArmTarget(2);
+      //   arm.rotateArm();
+      //   break; 
+      //   //stop
     }
   }
 
@@ -138,15 +144,17 @@ public class Robot extends TimedRobot {
     if (controller.getBackButtonPressed()){
       driveMode = false;
     }
+
+
     if (controller.getYButtonPressed()){
       arm.setArmTarget(1);
     }else if (controller.getAButtonPressed()){
       arm.setArmTarget(2);
     }
 
-    if (controller.getXButtonPressed()){
-      arm.resetEncoders();
-    }
+    // if (controller.getXButtonPressed()){
+    //   arm.resetEncoders();
+    // }
 
 
     // if (controller.getAButton()){
@@ -167,11 +175,11 @@ public class Robot extends TimedRobot {
 
     
 
-    // if (driveMode){
-    //   drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
-    // }else{  
-    //   drivetrain.tankDrive(controller.getLeftY(), controller.getRightY());
-    // }
+    if (driveMode){
+      drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
+    }else{  
+      drivetrain.tankDrive(controller.getLeftY(), controller.getRightY());
+    }
 
     if (controller.getRightBumper()){
       arm.startArm(0.75);
@@ -191,7 +199,7 @@ public class Robot extends TimedRobot {
     }
 
     if (controller.getXButton()){
-      //arm.startShooter(-0.5);
+      arm.startShooter(-0.5);
     }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
       arm.startShooter(controller.getRightTriggerAxis());
     }else{

@@ -126,7 +126,9 @@ public class Drivetrain {
         public void rotateToAngle(double fwd){
             rotateToAngleRate = 0.0;
             rotateToAngleRate = MathUtil.clamp(turnController.calculate(getAngle(), targetAngle) * Turn_Controller.MULTIPLIER, -Turn_Controller.CLAMP, Turn_Controller.CLAMP);
-            System.out.println(rotateToAngleRate);
+            // System.out.println(rotateToAngleRate);
+            // System.out.println(getAngle());
+            // System.out.println(targetAngle);
             drive.arcadeDrive(fwd, rotateToAngleRate);
         }
 
