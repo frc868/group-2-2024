@@ -125,7 +125,8 @@ public class Drivetrain {
         /* Rotates to target angle with forward movement */
         public void rotateToAngle(double fwd){
             rotateToAngleRate = 0.0;
-            rotateToAngleRate = MathUtil.clamp(turnController.calculate(ahrs.getAngle(), targetAngle) * Turn_Controller.MULTIPLIER, -Turn_Controller.CLAMP, Turn_Controller.CLAMP);
+            rotateToAngleRate = MathUtil.clamp(turnController.calculate(getAngle(), targetAngle) * Turn_Controller.MULTIPLIER, -Turn_Controller.CLAMP, Turn_Controller.CLAMP);
+            System.out.println(rotateToAngleRate);
             drive.arcadeDrive(fwd, rotateToAngleRate);
         }
 
@@ -134,7 +135,7 @@ public class Drivetrain {
         }
 
         public double getAngle(){
-            return ahrs.getAngle();
+            return -ahrs.getAngle();
         }
 
         /* Returns true if the robot is at the target angle */

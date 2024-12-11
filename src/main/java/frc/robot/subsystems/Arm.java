@@ -70,7 +70,7 @@ public class Arm {
         }
 
         public void setArmTarget(int target){
-                armController.reset(armEncoder.getPosition());
+                //armController.reset(getArmPosition());
                 switch (target){
                         case 1:
                                 armController.setGoal(Arm_Targets.SHOOT_ARM);
@@ -81,11 +81,16 @@ public class Arm {
                 }       
         }
 
+        public double getArmPosition(){
+                return armEncoder.getPosition();
+        }
+
         public void rotateArm(){
-                armController.reset(armEncoder.getPosition());
+                //armController.reset(getArmPosition());
                 double feedforward = armFeedforward.calculate(armController.getSetpoint().position, armController.getSetpoint().velocity);
-                double pid = armController.calculate(armEncoder.getPosition());
-                rotateArmRate = MathUtil.clamp(pid + feedforward, -Voltages.ARM_VOLTAGE, Voltages.ARM_VOLTAGE);
+                double pid = armController.calculate(getArmPosition());
+                rotateArmRate = MathUtil.clamp(pid /*+ feedforward*/, -Voltages.ARM_VOLTAGE, Voltages.ARM_VOLTAGE);
+                System.out.println(feedforward);
                 armMotor.setVoltage(rotateArmRate);
         }
 

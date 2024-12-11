@@ -64,14 +64,14 @@ public class Constants {
             }
 
             public static final class Voltages{
-                public static final double ARM_VOLTAGE = 6.0;
+                public static final double ARM_VOLTAGE = 1.5;
                 public static final double INTAKE_VOLTAGE = 1.5;
                 public static final double SHOOTER_VOLTAGE = 9.0;
             }
         }
 
         public static final class Arm_Controller{
-            public static final double kP = 2.0;
+            public static final double kP = 6.0;
             public static final double kI = 0.0;
             public static final double kD = 0.3;
 
@@ -81,13 +81,13 @@ public class Constants {
             public static final double kA = 0.0;
 
             public static final double kTolerance = Units.degreesToRadians(2.0);
-            public static final double MAX_VELOCITY = 1.0;
-            public static final double MAX_ACCELERATION = 1.0;
+            public static final double MAX_VELOCITY = 5.0;
+            public static final double MAX_ACCELERATION = 10.0;
         }
 
         public static final class Arm_Targets{
-            public static final double INTAKE_ARM = Units.degreesToRadians(40.0);
-            public static final double SHOOT_ARM = Units.degreesToRadians(5.0);
+            public static final double INTAKE_ARM = Units.degreesToRadians(-70.0);
+            public static final double SHOOT_ARM = Units.degreesToRadians(-25.0);
         }
 
         public static final class Encoders{

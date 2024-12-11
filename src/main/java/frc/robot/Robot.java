@@ -136,27 +136,32 @@ public class Robot extends TimedRobot {
     if (controller.getBackButtonPressed()){
       driveMode = false;
     }
-    /*if (controller.getYButtonPressed()){
+    if (controller.getYButtonPressed()){
       arm.setArmTarget(1);
     }else if (controller.getAButtonPressed()){
       arm.setArmTarget(2);
-    }*/
+    }
 
-    if (controller.getAButton()){
-      drivetrain.rotateToAngle();
-    }else{
-      drivetrain.stop();
+    if (controller.getXButtonPressed()){
+      arm.resetEncoders();
     }
+
+
+    // if (controller.getAButton()){
+    //   drivetrain.rotateToAngle();
+    // }else{
+    //   drivetrain.stop();
+    // }
     
-    if (controller.getBButtonPressed()){
-      drivetrain.yawTare();
-      drivetrain.resetEncoders();
-      drivetrain.setTargetAngle(drivetrain.getAngle());
-    }
+    // if (controller.getBButtonPressed()){
+    //   drivetrain.yawTare();
+    //   drivetrain.resetEncoders();
+    //   drivetrain.setTargetAngle(drivetrain.getAngle());
+    // }
     
-    if (controller.getYButtonPressed()){
-      drivetrain.setTargetAngle(90);
-    }
+    // if (controller.getYButtonPressed()){
+    //   drivetrain.setTargetAngle(90);
+    // }
 
     
 
@@ -167,9 +172,9 @@ public class Robot extends TimedRobot {
     // }
 
     if (controller.getRightBumper()){
-      arm.startArm(0.5);
+      arm.startArm(0.75);
     }else if (controller.getLeftBumper()){
-      arm.startArm(-0.5);
+      arm.startArm(-0.75);
     }else{
       arm.stopArm();
     }
@@ -184,14 +189,14 @@ public class Robot extends TimedRobot {
     }
 
     if (controller.getXButton()){
-      arm.startShooter(-0.5);
+      //arm.startShooter(-0.5);
     }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
       arm.startShooter(controller.getRightTriggerAxis());
     }else{
       arm.stopShooter();
     }
 
-    //arm.rotateArm();
+    arm.rotateArm();
       
     
   }
