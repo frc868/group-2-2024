@@ -124,6 +124,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    if (controller.getXButtonPressed()){
+      drivetrain.tankDrive(0.3, 0);
+    }
+
+
     if (controller.getStartButtonPressed()){
       driveMode = true;
     }
@@ -131,13 +136,9 @@ public class Robot extends TimedRobot {
       driveMode = false;
     }
     if (controller.getAButtonPressed()){
-      arm.setArmTarget(4);
-    }else if (controller.getBButtonPressed()){
       arm.setArmTarget(1);
-    }else if (controller.getXButtonPressed()){
+    }else if (controller.getBButtonPressed()){
       arm.setArmTarget(2);
-    }else if (controller.getYButtonPressed()){
-      arm.setArmTarget(3);
     }
 
     if (driveMode){

@@ -19,19 +19,19 @@ public class Constants {
         public static final class Motors{
 
             public static final class CAN_IDs{
-                public static final int LEFT_MOTOR = 6;
-                public static final int RIGHT_MOTOR = 7;
+                public static final int LEFT_MOTOR = 7; //confirmed
+                public static final int RIGHT_MOTOR = 8;
             }
 
             //TODO: UPDATE ENCODER CONVERSIONS AND DIRECTION INVERTS
 
             public static final class Direction{
-                public static final boolean LEFT_REVERSED = false;
+                public static final boolean LEFT_REVERSED = true;
                 public static final boolean RIGHT_REVERSED = false;
             }
 
             public static final class Encoders{
-                public static final double ENCODER_TO_INCHES = 1.0;
+                public static final double ENCODER_TO_INCHES = 5.0;
             }
         }
 
@@ -50,8 +50,8 @@ public class Constants {
     public static final class Arm{
         public static final class Motors{
             public static final class CAN_IDs{
-                public static final int ARM_MOTOR = 8;
-                public static final int INTAKE_MOTOR = 10;
+                public static final int ARM_MOTOR = 10; //confirmed
+                public static final int INTAKE_MOTOR = 6; 
                 public static final int SHOOTER_MOTOR = 9;
             }
 
@@ -84,14 +84,12 @@ public class Constants {
         }
 
         public static final class Arm_Targets{
-            public static final double HIGH_ARM = Units.degreesToRadians(60.0);
-            public static final double MID_ARM = Units.degreesToRadians(40.0);
-            public static final double LOW_ARM = Units.degreesToRadians(20.0);
-            public static final double FLOOR_ARM = Units.degreesToRadians(0.0);
+            public static final double INTAKE_ARM = Units.degreesToRadians(40.0);
+            public static final double SHOOT_ARM = Units.degreesToRadians(5.0);
         }
 
         public static final class Encoders{
-            public static final double GEAR_RATIO = 1 / 15.0;
+            public static final double GEAR_RATIO = 1 / 4.0;
             public static final double ENCODER_TO_RADIANS = GEAR_RATIO * Math.PI * 2;
         }
     }

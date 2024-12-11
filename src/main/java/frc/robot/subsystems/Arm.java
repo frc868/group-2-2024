@@ -71,16 +71,10 @@ public class Arm {
                 armController.reset(armEncoder.getPosition());
                 switch (target){
                         case 1:
-                                armController.setGoal(Arm_Targets.HIGH_ARM);
+                                armController.setGoal(Arm_Targets.SHOOT_ARM);
                                 break;
                         case 2:
-                                armController.setGoal(Arm_Targets.MID_ARM);
-                                break;
-                        case 3:
-                                armController.setGoal(Arm_Targets.LOW_ARM);
-                                break;
-                        case 4:
-                                armController.setGoal(Arm_Targets.FLOOR_ARM);
+                                armController.setGoal(Arm_Targets.INTAKE_ARM);
                                 break;
                 }       
         }
