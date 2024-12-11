@@ -43,6 +43,8 @@ public class Constants {
             public static final double kToleranceDegrees = 2.0;
             public static final double MAX_VELOCITY = 5.0;
             public static final double MAX_ACCELERATION = 10.0;
+            public static final double MULTIPLIER = 0.5;
+            public static final double CLAMP = 0.5;
         }
 
     }
