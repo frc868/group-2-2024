@@ -146,7 +146,7 @@ public class Robot extends TimedRobot {
     if (Math.abs(controller.getLeftY()) > Controller.threshholds.triggerDeadzone){
       arm.startArm(controller.getLeftY());
     }else{
-      arm.stopIntake();
+      arm.stopArm();
     }
 
     if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
