@@ -136,10 +136,14 @@ public class Robot extends TimedRobot {
     if (controller.getBackButtonPressed()){
       driveMode = false;
     }
-    if (controller.getAButtonPressed()){
+    /*if (controller.getAButtonPressed()){
       arm.setArmTarget(1);
     }else if (controller.getBButtonPressed()){
       arm.setArmTarget(2);
+    }*/
+
+    if (controller.getAButtonPressed()){
+      drivetrain.rotateToAngle();
     }
     
     if (controller.getXButtonPressed()){
@@ -152,7 +156,6 @@ public class Robot extends TimedRobot {
       drivetrain.setTargetAngle(90);
     }
 
-    drivetrain.rotateToAngle();
     if(drivetrain.atTarget()){
       drivetrain.stop();
       drivetrain.setTargetAngle(drivetrain.getAngle());
