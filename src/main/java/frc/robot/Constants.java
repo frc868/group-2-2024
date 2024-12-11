@@ -61,10 +61,10 @@ public class Constants {
                 public static final boolean SHOOTER_REVERSED = false;
             }
 
-            public static final class Voltages{ //PRELIM HAVE NOT TESTED!
+            public static final class Voltages{
                 public static final double ARM_VOLTAGE = 6.0;
                 public static final double INTAKE_VOLTAGE = 1.5;
-                public static final double SHOOTER_VOLTAGE = 10.0;
+                public static final double SHOOTER_VOLTAGE = 12.0;
             }
         }
 

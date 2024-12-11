@@ -34,6 +34,8 @@ public class Arm {
         private ArmFeedforward armFeedforward;
 
         public Arm(){
+                armMotor.setSmartCurrentLimit(40);
+                shooterMotor.setSmartCurrentLimit(40);
                 armMotor.setInverted(Motors.Direction.ARM_REVERSED);
                 intakeMotor.setInverted(Motors.Direction.INTAKE_REVERSED);
                 shooterMotor.setInverted(Motors.Direction.SHOOTER_REVERSED);
