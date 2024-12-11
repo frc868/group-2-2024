@@ -144,6 +144,8 @@ public class Robot extends TimedRobot {
 
     if (controller.getAButton()){
       drivetrain.rotateToAngle();
+    }else{
+      drivetrain.stop();
     }
     
     if (controller.getBButtonPressed()){
@@ -184,9 +186,9 @@ public class Robot extends TimedRobot {
     if (controller.getXButton()){
       arm.startShooter(-0.5);
     }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
-      arm.startArm(-controller.getRightTriggerAxis());
+      arm.startShooter(-controller.getRightTriggerAxis());
     }else{
-      arm.stopArm();
+      arm.stopShooter();
     }
 
     //arm.rotateArm();
