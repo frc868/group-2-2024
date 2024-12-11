@@ -32,6 +32,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     drivetrain = new Drivetrain();
     arm = new Arm();
+    
+    drivetrain.yawTare();
+    drivetrain.resetEncoders();
+    arm.resetEncoders();  
+    drivetrain.setTargetAngle(drivetrain.getAngle());
   }
 
 
