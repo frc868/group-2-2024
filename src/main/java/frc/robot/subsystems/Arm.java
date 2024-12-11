@@ -91,6 +91,10 @@ public class Arm {
                 armMotor.stopMotor();
         }
 
+        public void startArm(double speed){
+                armMotor.setVoltage(Voltages.ARM_VOLTAGE * speed);
+        }
+
         public boolean atTarget(){
                 return armController.atGoal();
         }

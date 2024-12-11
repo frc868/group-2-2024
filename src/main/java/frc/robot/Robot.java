@@ -137,10 +137,16 @@ public class Robot extends TimedRobot {
       arm.setArmTarget(2);
     }
 
-    if (driveMode){
+    /*if (driveMode){
       drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
     }else{  
       drivetrain.tankDrive(controller.getLeftY(), controller.getRightY());
+    }*/
+
+    if (Math.abs(controller.getLeftY()) > Controller.threshholds.triggerDeadzone){
+      arm.startArm(controller.getLeftY());
+    }else{
+      arm.stopIntake();
     }
 
     if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
@@ -154,6 +160,8 @@ public class Robot extends TimedRobot {
     }else{
       arm.stopShooter();
     }
+
+    
     
     //arm.rotateArm();
       

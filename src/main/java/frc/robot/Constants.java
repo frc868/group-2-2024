@@ -57,14 +57,14 @@ public class Constants {
 
             public static final class Direction{
                 public static final boolean ARM_REVERSED = false;
-                public static final boolean INTAKE_REVERSED = false;
+                public static final boolean INTAKE_REVERSED = true;
                 public static final boolean SHOOTER_REVERSED = false;
             }
 
             public static final class Voltages{ //PRELIM HAVE NOT TESTED!
                 public static final double ARM_VOLTAGE = 6.0;
-                public static final double INTAKE_VOLTAGE = 3.0;
-                public static final double SHOOTER_VOLTAGE = 6.0;
+                public static final double INTAKE_VOLTAGE = 1.5;
+                public static final double SHOOTER_VOLTAGE = 10.0;
             }
         }
 
