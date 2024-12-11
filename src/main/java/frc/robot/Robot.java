@@ -136,13 +136,13 @@ public class Robot extends TimedRobot {
     if (controller.getBackButtonPressed()){
       driveMode = false;
     }
-    /*if (controller.getAButtonPressed()){
+    /*if (controller.getYButtonPressed()){
       arm.setArmTarget(1);
-    }else if (controller.getBButtonPressed()){
+    }else if (controller.getAButtonPressed()){
       arm.setArmTarget(2);
     }*/
 
-    if (controller.getAButtonPressed()){
+    if (controller.getAButton()){
       drivetrain.rotateToAngle();
     }
     
@@ -165,23 +165,27 @@ public class Robot extends TimedRobot {
     // }
 
     if (controller.getRightBumper()){
-      arm.startArm(0.5);
+      arm.startShooter(1.0);
     }else if (controller.getLeftBumper()){
-      arm.startArm(-0.5);
-    }else{
-      arm.stopArm();
-    }
-
-    if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
-      arm.startIntake(controller.getLeftTriggerAxis());
-    }else{
-      arm.stopIntake();
-    }
-
-    if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
-      arm.startShooter(controller.getRightTriggerAxis());
+      arm.startShooter(-1.0);
     }else{
       arm.stopShooter();
+    }
+
+    // if (controller.getXButton()){
+    //   arm.startIntake(-1.0);
+    // }else if (controller.getBButton()){
+    //   arm.startIntake(1.0);
+    // }else{
+    //   arm.stopIntake();
+    // }
+
+    if (controller.getLeftTriggerAxis() > Controller.threshholds.triggerDeadzone){
+      arm.startArm(controller.getLeftTriggerAxis());
+    }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
+      arm.startArm(-controller.getRightTriggerAxis());
+    }else{
+      arm.stopArm();
     }
 
     //arm.rotateArm();

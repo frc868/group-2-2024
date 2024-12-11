@@ -5,15 +5,15 @@ import edu.wpi.first.math.util.Units;
 public class Constants {
     public static final class Controller{
         public static final class threshholds{
-            public static final double triggerDeadzone = 0.3;
+            public static final double triggerDeadzone = 0.1;
         }
     }
 
     public static final class Drivetrain{
         
         public static class Limiter {
-            public static final double SPEED_MULTIPLIER = 0.7;
-            public static final double ROTATION_MULTIPLIER = 0.7;
+            public static final double SPEED_MULTIPLIER = 0.8;
+            public static final double ROTATION_MULTIPLIER = 0.8;
         }
 
         public static final class Motors{
