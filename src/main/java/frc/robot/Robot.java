@@ -156,10 +156,7 @@ public class Robot extends TimedRobot {
       drivetrain.setTargetAngle(90);
     }
 
-    if(drivetrain.atTarget()){
-      drivetrain.stop();
-      drivetrain.setTargetAngle(drivetrain.getAngle());
-    }
+    
 
     /*if (driveMode){
       drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
