@@ -171,7 +171,7 @@ public class Robot extends TimedRobot {
     }else if (controller.getLeftBumper()){
       arm.startArm(-0.5);
     }else{
-      arm.stopShooter();
+      arm.stopArm();
     }
 
 
@@ -186,7 +186,7 @@ public class Robot extends TimedRobot {
     if (controller.getXButton()){
       arm.startShooter(-0.5);
     }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
-      arm.startShooter(-controller.getRightTriggerAxis());
+      arm.startShooter(controller.getRightTriggerAxis());
     }else{
       arm.stopShooter();
     }
