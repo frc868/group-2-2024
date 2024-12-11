@@ -31,7 +31,7 @@ public class Constants {
             }
 
             public static final class Encoders{
-                public static final double ENCODER_TO_INCHES = 5.0;
+                public static final double ENCODER_TO_INCHES = 10.0;
             }
         }
 
@@ -81,8 +81,8 @@ public class Constants {
             public static final double kA = 0.0;
 
             public static final double kTolerance = Units.degreesToRadians(2.0);
-            public static final double MAX_VELOCITY = 5.0;
-            public static final double MAX_ACCELERATION = 10.0;
+            public static final double MAX_VELOCITY = 1.0;
+            public static final double MAX_ACCELERATION = 1.0;
         }
 
         public static final class Arm_Targets{
