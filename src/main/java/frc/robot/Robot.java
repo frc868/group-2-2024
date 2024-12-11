@@ -101,24 +101,26 @@ public class Robot extends TimedRobot {
         break;
         //set arm target
       case 7:
-        //arm.rotateArm();
+        arm.rotateArm();
         if (arm.atTarget()){
           autonNum++;
         }
         break;
         //raise arm
       case 8:
-        //arm.rotateArm();
+        arm.rotateArm();
         arm.startShooter();
+        arm.startIntake();
         if (arm.getShooterPosition() >= 200){
           autonNum++;
           arm.stopShooter();
+          arm.stopIntake();
         }
         break;
         //shoot
       case 9:
-        arm.setArmTarget(1);
-        //arm.rotateArm();
+        arm.setArmTarget(2);
+        arm.rotateArm();
         break; 
         //stop
     }
