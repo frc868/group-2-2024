@@ -91,7 +91,7 @@ public class Constants {
         }
 
         public static final class Encoders{
-            public static final double GEAR_RATIO = 1 / 4.0;
+            public static final double GEAR_RATIO = 1 / 20.0;
             public static final double ENCODER_TO_RADIANS = GEAR_RATIO * Math.PI * 2;
         }
     }
