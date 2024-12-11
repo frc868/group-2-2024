@@ -136,6 +136,22 @@ public class Robot extends TimedRobot {
     }else if (controller.getBButtonPressed()){
       arm.setArmTarget(2);
     }
+    
+    if (controller.getXButtonPressed()){
+      drivetrain.yawTare();
+      drivetrain.resetEncoders();
+      drivetrain.setTargetAngle(drivetrain.getAngle());
+    }
+    
+    if (controller.getYButtonPressed()){
+      drivetrain.setTargetAngle(90);
+    }
+
+    drivetrain.rotateToAngle();
+    if(drivetrain.atTarget()){
+      drivetrain.stop();
+      drivetrain.setTargetAngle(drivetrain.getAngle());
+    }
 
     /*if (driveMode){
       drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
