@@ -64,9 +64,9 @@ public class Constants {
             }
 
             public static final class Voltages{
-                public static final double ARM_VOLTAGE = 1.5;
-                public static final double INTAKE_VOLTAGE = 1.5;
-                public static final double SHOOTER_VOLTAGE = 9.0;
+                public static final double ARM_VOLTAGE = 2.0;
+                public static final double INTAKE_VOLTAGE = 9.0;
+                public static final double SHOOTER_VOLTAGE = 12.0;
             }
         }
 
@@ -98,7 +98,7 @@ public class Constants {
     
     public static final class Auton{
         public static final class Drive_0{
-            public static final double DISTANCE = 10.0;
+            public static final double DISTANCE = 900.0;
             public static final double SPEED = 0.5;
         }
         public static final class Turn_1{

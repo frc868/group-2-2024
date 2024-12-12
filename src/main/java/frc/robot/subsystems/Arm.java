@@ -35,7 +35,8 @@ public class Arm {
 
         public Arm(){
                 armMotor.setSmartCurrentLimit(40);
-                shooterMotor.setSmartCurrentLimit(40);
+                shooterMotor.setSmartCurrentLimit(55);
+                intakeMotor.setSmartCurrentLimit(40);
                 armMotor.setInverted(Motors.Direction.ARM_REVERSED);
                 intakeMotor.setInverted(Motors.Direction.INTAKE_REVERSED);
                 shooterMotor.setInverted(Motors.Direction.SHOOTER_REVERSED);
@@ -90,7 +91,6 @@ public class Arm {
                 double feedforward = armFeedforward.calculate(armController.getSetpoint().position, armController.getSetpoint().velocity);
                 double pid = armController.calculate(getArmPosition());
                 rotateArmRate = MathUtil.clamp(pid /*+ feedforward*/, -Voltages.ARM_VOLTAGE, Voltages.ARM_VOLTAGE);
-                System.out.println(feedforward);
                 armMotor.setVoltage(rotateArmRate);
         }
 

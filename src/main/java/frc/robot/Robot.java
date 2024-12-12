@@ -52,14 +52,14 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic(){ 
-    switch (autonNum){
-      case 0: 
-        drivetrain.tankDrive(0.8, 0.8);
+  public void autonomousPeriodic(){
         if (drivetrain.getAveragePosition() >= Auton.Drive_0.DISTANCE){
           autonNum++;
           drivetrain.stop();
-        }
+        }else{
+          
+          drivetrain.arcadeDrive(0.8, 0.0);
+        
       // case 0:
       //   drivetrain.setTargetAngle(drivetrain.getAngle());
       //   autonNum++;
@@ -133,7 +133,8 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+  }
 
   @Override
   public void teleopPeriodic() {
@@ -152,9 +153,9 @@ public class Robot extends TimedRobot {
       arm.setArmTarget(2);
     }
 
-    // if (controller.getXButtonPressed()){
-    //   arm.resetEncoders();
-    // }
+    if (controller.getBButtonPressed()){
+      arm.resetEncoders();
+    }
 
 
     // if (controller.getAButton()){
@@ -174,12 +175,8 @@ public class Robot extends TimedRobot {
     // }
 
     
-
-    if (driveMode){
-      drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
-    }else{  
-      drivetrain.tankDrive(controller.getLeftY(), controller.getRightY());
-    }
+    drivetrain.arcadeDrive(controller.getLeftY(), controller.getRightX());
+    
 
     if (controller.getRightBumper()){
       arm.startArm(0.75);
@@ -199,14 +196,24 @@ public class Robot extends TimedRobot {
     }
 
     if (controller.getXButton()){
-      arm.startShooter(-0.5);
+      arm.startShooter(-0.4);
     }else if (controller.getRightTriggerAxis() > Controller.threshholds.triggerDeadzone){
       arm.startShooter(controller.getRightTriggerAxis());
     }else{
       arm.stopShooter();
     }
 
-    arm.rotateArm();
+    if(driveMode){
+      arm.rotateArm();
+    }else{
+      if (controller.getRightBumper()){
+        arm.startArm(0.75);
+      }else if (controller.getLeftBumper()){
+        arm.startArm(-0.75);
+      }else{
+        arm.stopArm();
+      }
+    }
       
     
   }
